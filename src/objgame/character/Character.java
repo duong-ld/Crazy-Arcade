@@ -62,5 +62,4 @@ public abstract class Character extends ObjGame {
 	
 	public abstract void putBomb(Controller c);
 	
-	
 }

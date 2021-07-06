@@ -6,10 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import game.constant.EffectDefine;
 import game.position.Position;
 
 public class DeadEffect extends Effect {
+
+	public static final int NUMBER_STATE_DEAD = 16;
 
 	@Deprecated
 	public DeadEffect(int x, int y) {
@@ -27,7 +28,7 @@ public class DeadEffect extends Effect {
 	public void initImage() {
 		try {
 			BufferedImage tmp = null;
-            for (int i = 0; i < EffectDefine.NUMBER_STATE_DEAD; i++) {
+            for (int i = 0; i < DeadEffect.NUMBER_STATE_DEAD; i++) {
 				tmp = ImageIO.read(new File("src/images/effect/dead/" + (i + 1) + ".png"));
 				images.add(tmp);
 			}
@@ -38,7 +39,7 @@ public class DeadEffect extends Effect {
 	
 	@Override
 	public BufferedImage getImage() {
-		return images.get(stateEffect++ % EffectDefine.NUMBER_STATE_DEAD);
+		return images.get(stateEffect++ % DeadEffect.NUMBER_STATE_DEAD);
 	}
 	
 }

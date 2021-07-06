@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
 
 import game.constant.Constain;
 import game.constant.Direction;
-import game.constant.MapDefine;
 import game.controller.Controller;
 import game.map.Map;
 import game.position.Position;
@@ -17,10 +16,17 @@ public class Bomber extends Character {
 	private int maxBomb = 1; // max of bomb can set
 	private int countBomb = 0; // count number of bomb
 	private static int flagColor = 0; // use for initialize color player
+	private int oldDirection = 0;
 	
 	public Bomber(Position pos) {
 		super(pos);
 		initImage();
+	}
+	public int getOldDirection() {
+		return oldDirection;
+	}
+	public void setOldDirection(int oldDirection) {
+		this.oldDirection = oldDirection;
 	}
 	public Bomber(int x, int y) {
 		super(x, y);
@@ -74,18 +80,18 @@ public class Bomber extends Character {
 		if (Map.matrix[y][x] > 0) {
 			return true;
 		}
-		if (Map.matrix[y][x] == MapDefine.BOMB) {
+		if (Map.matrix[y][x] == Map.BOMB) {
 			return true;
 		}
-		if (Map.matrix[y][x] == MapDefine.BOX_EXPLODE) {
+		if (Map.matrix[y][x] == Map.BOX_EXPLODE) {
 			return true;
 		}
-		if (Map.matrix[y][x] == MapDefine.ITEM_BOMB) {
+		if (Map.matrix[y][x] == Map.ITEM_BOMB) {
 			maxBomb++;
 			Map.matrix[y][x] = 0; // bomber eat item and it disappear
 			return false;
 		}
-		if (Map.matrix[y][x] == MapDefine.ITEM_BOMBSIZE) {
+		if (Map.matrix[y][x] == Map.ITEM_BOMBSIZE) {
 			length++;
 			Map.matrix[y][x] = 0;
 			return false;
@@ -132,12 +138,12 @@ public class Bomber extends Character {
 	public void putBomb(Controller c) {
 		if (Map.matrix[pos.getY()][pos.getX()] == 0
 				&& isLiving
-				&& countBomb < maxBomb) {
-			
+				&& countBomb < maxBomb
+		) {
 			c.getBombs().add(new Bomb(pos.getX(), pos.getY(), length, this));
 			countBomb ++;
 			
-			Map.matrix[pos.getY()][pos.getX()] = MapDefine.BOMB;
+			Map.matrix[pos.getY()][pos.getX()] = Map.BOMB;
 		}
 	}
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import game.constant.EffectDefine;
 import game.controller.Controller;
 import game.map.Map;
 import game.position.Position;
@@ -15,6 +14,9 @@ import objgame.ObjGame;
 import objgame.character.Bomber;
 
 public class Bomb extends ObjGame {
+	
+	public static final int NUMBER_STATE_BOMB = 8;
+	
 	private int length; // length of fire
 	private long start; // time this bomb have been created
 	private Bomber onwer;
@@ -45,7 +47,7 @@ public class Bomb extends ObjGame {
 	public void initImage() {
 		try {
 			BufferedImage tmp = null;
-            for (int i = 0; i < EffectDefine.NUMBER_STATE_BOMB; i++) {
+            for (int i = 0; i < Bomb.NUMBER_STATE_BOMB; i++) {
 				tmp = ImageIO.read(new File("src/images/weapon/boom/boom" + (i + 1) + ".png"));
 				images.add(tmp);
 			}
@@ -56,7 +58,7 @@ public class Bomb extends ObjGame {
 	@Override
 	public BufferedImage getImage() {
 		// TODO Auto-generated method stub
-		return images.get(stateBomb++ % EffectDefine.NUMBER_STATE_BOMB);
+		return images.get(stateBomb++ % Bomb.NUMBER_STATE_BOMB);
 	}
 
 	public int getLength() {

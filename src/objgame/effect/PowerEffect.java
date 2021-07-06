@@ -6,10 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import game.constant.EffectDefine;
 import game.position.Position;
 
 public class PowerEffect extends Effect {
+
+	public static final int NUMBER_STATE_POWER = 8;
 
 	@Deprecated
 	public PowerEffect(int x, int y) {
@@ -27,7 +28,7 @@ public class PowerEffect extends Effect {
 	public void initImage() {
 		try {
 			BufferedImage tmp = null;
-            for (int i = 0; i < EffectDefine.NUMBER_STATE_POWER; i++) {
+            for (int i = 0; i < PowerEffect.NUMBER_STATE_POWER; i++) {
 				tmp = ImageIO.read(new File("src/images/effect/power/" + (i + 1) + ".png"));
 				images.add(tmp);
 			}
@@ -38,7 +39,7 @@ public class PowerEffect extends Effect {
 	
 	@Override
 	public BufferedImage getImage() {
-		return images.get(stateEffect++ % EffectDefine.NUMBER_STATE_POWER);
+		return images.get(stateEffect++ % PowerEffect.NUMBER_STATE_POWER);
 	}
 	
 }
